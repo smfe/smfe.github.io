@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Video In-Page</title>
+    <!-- Style Sheets -->
+    <link href="./Video In-Page_files/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="./Video In-Page_files/icon" rel="stylesheet">
+    <link href="./Video In-Page_files/font-awesome.min.css" rel="stylesheet">
+    <link href="./Video In-Page_files/css" rel="stylesheet" type="text/css">
+
+    <script src="./Video In-Page_files/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+
+<div id="second-block" class="g-spot-block main row">
+    <div class="col no-pad s12 m12 l12">
+        <div class="col no-pad s12 m12 l6 centerer-image g-spot-mobile-fix">
+
+                            <div class="mini-pop-div">
+                    <div class="mini-pop-container">
+                        <div id="mini-pop-wrapper" style="margin-left: -1px;">
+                            <div class="mini-pop-bg"></div>
+                            <video id="mini-pop-vid" src="http://cdn-video.adspruce.com/website/video-in-page-diesel.mp4"></video>
+                            <div id="mini-pop-tab" style="background-image: url(&quot;http://32808eb254d4d3a338bf-2b96655e783eed0674def440d206be58.r48.cf3.rackcdn.com/new-assets/collapse.png&quot;);"></div>
+                            <div id="mini-pop-mute"></div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div><!-- col s12 m12 l6 -->
+        <div class="col s12 m12 l6">
+            <div class="centerer-text how-intro left animation-adspruce fadeIn animated" data-wow-duration="1s" data-wow-delay="0s" style="visibility: visible; animation-duration: 1s; animation-delay: 0s; animation-name: fadeIn;">
+                <h2>How it works</h2>
+                <p>When a user visits one of the many sites within the AdSpruce Publisher Network, your video slides
+                into view, overlaying the content of the page. When the video is completed, the player is replaced
+                with a click-through banner that allows users to further engage with your advert.</p>
+
+                <p>Closable at any time, this lightweight, ultra-quick ad spot gives users the power to choose the
+                 level at which they want to interact with your brand, providing you with only the most qualified
+                 clicks and views. </p>
+            </div><!-- .centerer-text -->
+        </div><!-- col s12 m12 l6 -->
+    </div><!-- col s12 m12 l12 -->
+</div><!-- #second-block -->
+
+<script>
+    function VideoStatus() {
+    /*
+	var i = document.querySelector("#videoPlayer1");
+    //i.muted = true;
+    window.innerWidth < 767 ? i.pause() : (i.autoplay = !0, i.load(), i.onended = function() {
+        i.load(), i.pause(), $(".btnPlay").fadeTo(1e3, 1).css("display", "block"), $(".btnPlay .fa").fadeTo(1e3, 1).css("display", "block")
+    }, $(".btnPlay").click(function() {
+        return i.play && (i.play(), $(".btnPlay").fadeOut(1e3, 0), $(".btnPlay .fa").fadeOut(1e3, 0)), !1
+    }))
+	*/
+}
+window.onload = VideoStatus, $(function() {
+    $(window).bind("resize", function() {
+        var i = document.querySelector("#videoPlayer1");
+        $(".btnPlay")[0].onclick = function() {
+            i.play(), $(".btnPlay").fadeOut(100, 0), $(".btnPlay .fa").fadeOut(100, 0)
+        }, $(this).width() < 767 ? ($(".btnPlay").fadeOut(100, 0), $(".btnPlay .fa").fadeOut(100, 0), i.pause()) : ($(".btnPlay").fadeTo(100, 1).css("display", "block"), $(".btnPlay .fa").fadeTo(100, 1).css("display", "block"), i.pause())
+    })
+});
+var isVisible = function(i) {
+        var e, n, t = window.innerHeight,
+            a = window.innerWidth,
+            d = window.pageYOffset,
+            o = window.pageXOffset,
+            l = i.clientHeight,
+            p = i.clientWidth;
+        return e = i.parentNode.parentNode.parentNode.parentNode.offsetLeft + i.offsetLeft, n = i.parentNode.parentNode.parentNode.parentNode.offsetTop + i.offsetTop, n + l > d && n + l - d >= .7 * l && d + t > n && d + t - n >= .7 * l && e + p > o && e + p - o >= .7 * p && o + a > e && o + a - e >= .7 * p
+    },
+    minivid = $("#mini-pop-vid")[0],
+    miniwrap = $("#mini-pop-wrapper")[0],
+    minitab = $("#mini-pop-tab")[0],
+    minimute = $("#mini-pop-mute")[0],
+    lasttype = "";
+miniwrap.style.marginLeft = "-312px", minivid.muted = !0, minivid.addEventListener("ended", function() {
+    minipopAnimate("full")
+});
+var minipopAnimate = function(i) {
+    var e, n, t, a = parseInt(miniwrap.style.marginLeft),
+        d = a,
+        o = 6,
+        l = 33;
+    return "partial" === i ? (e = -272, n = function() {
+        minitab.style.backgroundImage = 'url("http://32808eb254d4d3a338bf-2b96655e783eed0674def440d206be58.r48.cf3.rackcdn.com/new-assets/expand.png")'
+    }) : "full" === i || "video" === i ? (e = -1, n = function() {
+        minitab.style.backgroundImage = 'url("http://32808eb254d4d3a338bf-2b96655e783eed0674def440d206be58.r48.cf3.rackcdn.com/new-assets/collapse.png")', "full" === i ? (minivid.style.display = "none", minimute.style.display = "none", setTimeout(function() {
+            minipopAnimate("hide")
+        }, 1e4)) : "video" === i && "none" !== minivid.style.display && minivid.play()
+    }) : "hide" === i && (e = -312), a === e && i === lasttype ? !0 : (a > e && (o = -1 * o), lasttype = i, void(t = setInterval(function() {
+        0 > o && e > d + o || o > 0 && d + o > e ? (miniwrap.style.marginLeft = e + "px", clearInterval(t), "function" == typeof n && n()) : (d += o, miniwrap.style.marginLeft = d + "px")
+    }, l)))
+};
+minipopAnimate("partial");
+var myVisibleTimer = setInterval(function() {
+    isVisible(minivid) && 0 === minivid.currentTime && "video" !== lasttype ? minipopAnimate("video") : isVisible(minivid) && minivid.paused === !0 && "none" !== minivid.style.display ? minivid.play() : isVisible(minivid) || minivid.pause()
+}, 250);
+minitab.onclick = function() {
+    minipopAnimate("video" === lasttype || "full" === lasttype ? "partial" : "video")
+}, minimute.onclick = function() {
+    minivid.muted === !0 ? (minivid.muted = !1, minimute.style.backgroundImage = 'url("http://32808eb254d4d3a338bf-2b96655e783eed0674def440d206be58.r48.cf3.rackcdn.com/new-assets/unmute.png")') : (minivid.muted = !0, minimute.style.backgroundImage = 'url("http://32808eb254d4d3a338bf-2b96655e783eed0674def440d206be58.r48.cf3.rackcdn.com/new-assets/mute.png")')
+};
+
+function loadCampaigns() {
+    
+}
+var isMobile = !1,
+    isTablet = !1;
+$(document).ready(function() {
+    
+});
+</script>
+
+</body></html>
